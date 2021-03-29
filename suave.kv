@@ -1,0 +1,396 @@
+#: import sm kivy.uix.screenmanager
+
+<MyImage@Image>:
+	keep_ratio: False
+	allow_stretch: True
+
+GestorDeTela:
+	transition: sm.FadeTransition()
+	id:gestordetela
+	TelaPrincipal:
+		id:tela_principal
+		name:'TelaPrincipal'
+		manager:'gestordetela'
+	TelaControleUm:
+		id:tela_controleum
+		name:'TelaControleUm'
+		manager:'gestordetela'
+	TelaControleDois:
+		id:tela_controledois
+		name:'TelaControleDois'
+		manager:'gestordetela'
+	TelaFaturas:
+		id:tela_faturas
+		name:'TelaFaturas'
+		manager:'gestordetela'
+	TelaTodosDias:
+		id:tela_todosdias
+		name:'TelaTodosDias'
+		manager:'gestordetela'
+
+
+<TelaPrincipal>:
+	canvas:
+		Color:
+			rgb:[1,1,1]
+		Rectangle:
+			pos: self.pos
+			size:self.size	
+
+	ScrollView:
+		BoxLayout:
+			orientation: 'vertical'
+            padding: 10
+            spacing: 5
+            size_hint:1,1
+            height: self.minimum_height
+            BoxLayout:
+            	orientation:'vertical'
+	            BoxLayout:
+	            	size_hint:1,.3
+			        MyImage:
+						source:'img/suave.jpg'
+				BoxLayout:
+					size_hint:1,.9
+					canvas:
+						Color:
+							rgb:[1,1,1]
+						Rectangle:
+							pos: self.pos
+							size:self.size
+							source:'img/kwanza.jpg'
+					Label:
+						text : root.min()
+
+			
+            BoxLayout:
+            	orientation:'horizontal'
+            	BoxLayout:
+            		orientation:'vertical'
+            		Button:
+            			text:'Faturas'
+            			size_hint:1,.1
+            			on_release: app.root.current='TelaFaturas'
+            		Button:
+            			text:''
+            			size_hint:1,.2
+            	BoxLayout:
+            		orientation:'vertical'
+            		Button:
+            			text:'Controle'
+            			on_release: app.root.current='TelaControleUm'
+            			size_hint:1,.1
+            		Button:
+            			text:'Op Nuvem'
+            			size_hint:1,.2
+
+            BoxLayout:
+            	size_hint:1,.2
+            	Button:
+            		canvas:
+						Color:
+							rgb:[1,1,.1]
+						Rectangle:
+							pos: self.pos
+							size:self.size	
+					on_release: app.root.current='TelaControleUm'
+            	Button:
+            		
+				            		
+            	Button:
+            		canvas:
+						Color:
+							rgb:[1,0,0]
+						Rectangle:
+							pos: self.pos
+							size:self.size	
+            		
+
+<TelaControleUm>:
+	canvas:
+		Color:
+			rgb:[1,1,1]
+		Rectangle:
+			pos: self.pos
+			size:self.size	
+
+	ScrollView:
+		BoxLayout:
+			orientation: 'vertical'
+            padding: 10
+            spacing: 5
+            size_hint:1,1
+            height: self.minimum_height
+            BoxLayout:
+            	orientation:'vertical'
+	            size_hint:1,.3
+			    MyImage:
+					source:'img/suave.jpg'
+			BoxLayout:
+				BoxLayout:
+					orientation:'vertical'
+					Button:
+						text:'Dia'
+						size_hint:1,.1
+						height:80
+						on_release: app.root.current='TelaControleDois'
+					Button:
+						text:'30 Dias'
+						size_hint:1,.1
+						height:80
+					Button:
+						text:'Quantos Dias?'
+						size_hint:1,.1
+						height:80
+				BoxLayout:
+					orientation:'vertical'
+					Button:
+						text:'7 Dias'
+						size_hint:1,.1
+						height:80
+					Button:
+						text:'60 Dias'
+						size_hint:1,.1
+						height:80
+					Button:
+						text:'Todos Dias'
+						size_hint:1,.1
+						height:80
+			MyImage:
+				source:'img/ouro.jpg'
+
+			BoxLayout:
+            	size_hint:1,.2
+            	Button:
+            		canvas:
+						Color:
+							rgb:[1,1,.1]
+						Rectangle:
+							pos: self.pos
+							size:self.size	
+					on_release: app.root.current='TelaPrincipal'
+            	Button:
+            		on_release: app.root.current='TelaPrincipal'
+				            		
+            	Button:
+            		canvas:
+						Color:
+							rgb:[1,0,0]
+						Rectangle:
+							pos: self.pos
+							size:self.size	
+
+<TelaControleDois>:
+	canvas:
+		Color:
+			rgb:[1,1,1]
+		Rectangle:
+			pos: self.pos
+			size:self.size	
+
+	ScrollView:
+		BoxLayout:
+			orientation: 'vertical'
+            padding: 10
+            spacing: 5
+            size_hint:1,1
+            height: self.minimum_height
+            BoxLayout:
+            	orientation:'vertical'
+	            size_hint:1,.4
+			    MyImage:
+					source:'img/suave.jpg'
+			
+			BoxLayout:
+				orientation:'horizontal'
+				BoxLayout:
+					padding:2
+					orientation:'vertical'
+					BoxLayout:
+						Button:
+							text:'Entradas'
+					BoxLayout:
+						orientation:'horizontal'
+						BoxLayout:
+							size_hint:.6,1
+							Button:
+								id:um
+								text:  root.n_entradas()
+						BoxLayout:
+							Button:
+								text: root.entradas()
+								
+				BoxLayout:
+					orientation:'vertical'
+					padding:2
+					BoxLayout:
+						Button:
+							text:'Saidas'
+					BoxLayout:
+						orientation:'horizontal'
+						BoxLayout:
+							size_hint:.6,1
+							Button:
+								text: root.n_saidas()
+						BoxLayout:
+							Button:
+								text:root.saidas()
+			BoxLayout:
+				orientation:'horizontal'
+				BoxLayout:
+					padding:2
+					orientation:'vertical'
+					BoxLayout:
+						Button:
+							text:'Saldo\nTotal'
+					BoxLayout:
+						orientation:'horizontal'
+						BoxLayout:
+							Button:
+								text: root.total()
+				BoxLayout:
+					padding:2
+					orientation:'vertical'
+					BoxLayout:
+						Button:
+							text:'Dinheiro'
+					BoxLayout:
+						orientation:'horizontal'
+						BoxLayout:
+							size_hint:.6,1
+							Button:
+								text:root.n_dinheiro()
+						BoxLayout:
+							Button:
+								text: root.dinheiro()
+			BoxLayout:
+				orientation:'horizontal'
+				BoxLayout:
+					padding:2
+					orientation:'vertical'
+					BoxLayout:
+						Button:
+							text:'TPA'
+					BoxLayout:
+						orientation:'horizontal'
+						BoxLayout:
+							size_hint:.6,1
+							Button:
+								text:root.n_tpa()
+						BoxLayout:
+							Button:
+								text:root.tpa()
+				BoxLayout:
+					padding:2
+					orientation:'vertical'
+					BoxLayout:
+						Button:
+				
+
+
+			BoxLayout:
+            	size_hint:1,.3
+            	Button:
+            		canvas:
+						Color:
+							rgb:[1,1,.1]
+						Rectangle:
+							pos: self.pos
+							size:self.size	
+					on_release: app.root.current='TelaControleUm'
+            	Button:
+            		on_release: app.root.current='TelaPrincipal'
+				            		
+            	Button:
+            		canvas:
+						Color:
+							rgb:[1,0,0]
+						Rectangle:
+							pos: self.pos
+							size:self.size	
+
+<TelaFaturas>:
+	canvas:
+		Color:
+			rgb:[1,1,1]
+		Rectangle:
+			pos: self.pos
+			size:self.size	
+
+	ScrollView:
+		BoxLayout:
+			orientation: 'vertical'
+            padding: 10
+            spacing: 5
+            size_hint:1,1
+            height: self.minimum_height
+            BoxLayout:
+            	orientation:'vertical'
+	            size_hint:1,.2888
+			    MyImage:
+					source:'img/suave.jpg'
+
+			BoxLayout:
+				orientation:'horizontal'
+				BoxLayout:
+					orientation:'vertical'
+					Button:
+						text:'TODOS DIAS'
+						color:[1,0,0,1]
+						on_release: app.root.current='TelaTodosDias'
+					Button:
+						text:'ANOS'
+						color:[1,0,0,1]
+					Button:
+					Button:
+				BoxLayout:
+					orientation:'vertical'
+					Button:
+						text:'MESES'
+						color:[1,0,0,1]
+					Button:
+						canvas:
+							Color:
+								rgb:[1,1,1]
+							Rectangle:
+								pos: self.pos
+								size:self.size	
+					Button:
+						text:'Enviar\nProforma'
+					Button:
+						text:'Ver\nProformas'
+			MyImage:
+				source:'img/ouro.jpg'
+
+
+			BoxLayout:
+            	size_hint:1,.2345
+            	Button:
+            		canvas:
+						Color:
+							rgb:[1,1,.1]
+						Rectangle:
+							pos: self.pos
+							size:self.size	
+					on_release: app.root.current='TelaPrincipal'
+            	Button:
+            		on_release: app.root.current='TelaPrincipal'
+				            		
+            	Button:
+            		canvas:
+						Color:
+							rgb:[1,0,0]
+						Rectangle:
+							pos: self.pos
+							size:self.size	
+
+<TelaTodosDias>:
+    
+
+
+
+
+			
+		   
+				
+							
